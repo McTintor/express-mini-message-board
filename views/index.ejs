@@ -11,6 +11,10 @@
             <h2><%= message.user %></h2>
             <p><%= message.text %></p>
             <p><%= message.added %></p>
+
+            <form action= "/details/<%=message.messageId%>" method="get">
+                <button type="submit">More Details</button>
+            </form>
         </div>
     <% } %>
 </body>
