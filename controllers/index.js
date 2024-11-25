@@ -18,3 +18,19 @@ exports.getHomePage = (req, res, next) => {
         path: '/'
     })
 }
+
+exports.getAddNewMessage = (req, res, next) => {
+    res.render('form', {
+        pageTitle: 'Add New Message',
+        path: '/new'
+    })
+} 
+
+exports.postMessage = (req, res, next) => {
+        const user = req.body.user;
+        const text = req.body.messageText;
+
+        messages.push({ text, user, added: new Date() });
+
+        res.redirect('/');
+}

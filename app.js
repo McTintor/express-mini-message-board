@@ -11,12 +11,10 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 const indexRoutes = require('./routes/index');
-const messageRoutes = require('./routes/message');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(messageRoutes);
 app.use(indexRoutes);
 
 app.use(errorController.get404);
