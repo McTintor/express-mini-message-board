@@ -1,15 +1,19 @@
+const moment = require('moment');
+
 const messages = [
     {
       messageId: Math.random(),
-      text: "Hi there!",
+      title: "Hi there!",
+      text: "This is a message saying Hi there!",
       user: "Amando",
-      added: new Date()
+      added: moment(new Date()).format('DD.MM.YYYY HH:mm')
     },
     {
       messageId: Math.random(),
-      text: "Hello World!",
+      title: "Hello World!",
+      text: "This is a message saying Hello World!",
       user: "Charles",
-      added: new Date()
+      added: moment(new Date()).format('DD.MM.YYYY HH:mm')
     }
   ];
 
@@ -31,9 +35,10 @@ exports.getAddNewMessage = (req, res, next) => {
 exports.postMessage = (req, res, next) => {
         const messageId = Math.random();
         const user = req.body.user;
+        const title = req.body.title;
         const text = req.body.messageText;
 
-        messages.push({ messageId, text, user, added: new Date() });
+        messages.push({ messageId, title, text, user, added: moment(new Date()).format('DD.MM.YYYY HH:mm') });
 
         res.redirect('/');
 }
@@ -44,9 +49,11 @@ exports.getMessage = (req, res, next) => {
 
     res.render('details', {
         messageId: targetMessage.messageId,
+        title: targetMessage.title,
         text: targetMessage.text,
         user: targetMessage.user,
         added: targetMessage.added,
-        pageTitle: 'Details'
+        pageTitle: 'Details',
+        path: ''
     })
 }
