@@ -8,7 +8,9 @@
         <input type="text" name="title" id="title" required>
         <label for="messageText">Message:</label>
         <textarea id="messageText" name="messageText" required placeholder="Type your message here"></textarea>
-
-            <button class="btn" type="submit">Add New Message</button>
+            <div class="form-buttons">
+                <button class="btn" type="button"><a href="/">Back</a></button>
+                <button class="btn" type="submit">Add New Message</button>
+            </div>
     </form>
 <%- include('footer.ejs') %>

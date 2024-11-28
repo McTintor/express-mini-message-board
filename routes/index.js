@@ -14,4 +14,6 @@ router.get('/details/:messageId', indexController.getTargetMessage);
 
 router.post('/new', indexController.postMessage);
 
+router.post('/delete/:messageId', indexController.deleteMessage);
+
 module.exports = router;

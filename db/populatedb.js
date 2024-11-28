@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
+require('dotenv').config();
+
 const { Client } = require("pg");
 
-const dbUrl = process.argv[2];
+const dbUrl = process.env.DB_URL;
 if (!dbUrl) {
-  console.error("Error: Please provide a database URL as a command line argument.");
+  console.error("Error: DB_URL environment variable is not set.");
   process.exit(1);
 }
 
@@ -17,11 +19,16 @@ CREATE TABLE IF NOT EXISTS messages (
   added TIMESTAMP DEFAULT NOW()
 );
 
-INSERT INTO messages (person, title, text) 
-VALUES
-  ('Bryan', 'Hello World', 'This is my first message.'),
-  ('Odin', 'Greetings', 'Welcome to the message board.'),
-  ('Damon', 'Update', 'Here is some exciting news for today.');
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM messages LIMIT 1) THEN
+    INSERT INTO messages (person, title, text) 
+    VALUES
+      ('Bryan', 'Hello World', 'This is my first message.'),
+      ('Odin', 'Greetings', 'Welcome to the message board.'),
+      ('Damon', 'Update', 'Here is some exciting news for today.');
+  END IF;
+END $$;
 `;
 
 async function main() {

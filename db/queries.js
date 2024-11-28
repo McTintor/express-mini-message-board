@@ -17,9 +17,18 @@ async function getMessage(targetMessageId) {
     const { rows } = await pool.query('SELECT * FROM messages WHERE id = $1', [targetMessageId]);
     return rows;
 }  
+
+async function deleteMessageById(id) {
+    try {
+      await pool.query('DELETE FROM messages WHERE id = $1', [id]);
+    } catch (err) {
+      throw err; // Handle the error appropriately
+    }
+  }
   
 module.exports = {
     getAllMessages,
     insertMessage,
-    getMessage
+    getMessage,
+    deleteMessageById
 };

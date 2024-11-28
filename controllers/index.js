@@ -27,7 +27,7 @@ const postMessage = async (req, res, next) => {
         const title = req.body.title;
         const text = req.body.messageText;
 
-        db.insertMessage(person, title, text);
+        await db.insertMessage(person, title, text);
 
         res.redirect('/');
 }
@@ -47,9 +47,22 @@ const getTargetMessage = async (req, res, next) => {
     });
 };
 
+const deleteMessage = async (req, res, next) => {
+    const messageId = req.params.messageId;
+  
+    try {
+      await db.deleteMessageById(messageId); // Call the database query
+      res.redirect('/'); // Redirect back to the homepage after deletion
+    } catch (err) {
+      console.error("Error deleting message: ", err);
+      res.status(500).send("Failed to delete the message.");
+    }
+  };
+
 module.exports = {
     getHomePage,
     getAddNewMessage,
     postMessage,
-    getTargetMessage
+    getTargetMessage,
+    deleteMessage
 }
