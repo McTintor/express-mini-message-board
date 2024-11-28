@@ -7,6 +7,8 @@ const errorController = require('./controllers/error');
 
 const app = express();
 
+const PORT = process.env.PORT || 3004;
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
@@ -19,4 +21,4 @@ app.use(indexRoutes);
 
 app.use(errorController.get404);
 
-app.listen(3004);
+app.listen(PORT);
