@@ -19,4 +19,4 @@ app.use(indexRoutes);
 
 app.use(errorController.get404);
 
-app.listen(3002);
+app.listen(3004);

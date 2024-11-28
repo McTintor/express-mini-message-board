@@ -2,11 +2,24 @@
 
     <% for (let message of messages) { %>
         <div class="message">
-            <h2><%= message.user %></h2>
+            <h2><%= message.person %></h2>
             <p><%= message.title %></p>
-            <p><%= message.added %></p>
+            <p>
+                <% 
+                    const date = new Date(message.added);
+                    const formattedDate = date.toLocaleString('en-GB', { 
+                        weekday: 'short', 
+                        month: 'short', 
+                        day: '2-digit', 
+                        year: 'numeric', 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    });
+                %>
+            <%= formattedDate %>
+            </p>
 
-            <form action= "/details/<%=message.messageId%>" method="get">
+            <form action= "/details/<%=message.id%>" method="get">
                 <button class="btn" type="submit">Open</button>
             </form>
         </div>

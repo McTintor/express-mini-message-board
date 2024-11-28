@@ -1,59 +1,55 @@
-const moment = require('moment');
+const db = require('../db/queries');
 
-const messages = [
-    {
-      messageId: Math.random(),
-      title: "Hi there!",
-      text: "This is a message saying Hi there!",
-      user: "Amando",
-      added: moment(new Date()).format('DD.MM.YYYY HH:mm')
-    },
-    {
-      messageId: Math.random(),
-      title: "Hello World!",
-      text: "This is a message saying Hello World!",
-      user: "Charles",
-      added: moment(new Date()).format('DD.MM.YYYY HH:mm')
+const getHomePage = async (req, res, next) => {
+    try {
+        const messages = await db.getAllMessages();
+        console.log("Messages fetched: ", messages);
+        res.render('index', {
+            pageTitle: 'Messages',
+            path: '/',
+            messages: messages,
+        })
+    } catch (err) {
+        console.error("Error fetching messages: ", err);
+        res.status(500).json({error: "Internal server error"});
     }
-  ];
-
-exports.getHomePage = (req, res, next) => {
-    res.render('index', {
-        messages: messages,
-        pageTitle: 'Mini Message Board',
-        path: '/'
-    })
 }
 
-exports.getAddNewMessage = (req, res, next) => {
+const getAddNewMessage = async (req, res, next) => {
     res.render('form', {
         pageTitle: 'Add New Message',
         path: '/new'
     })
 } 
 
-exports.postMessage = (req, res, next) => {
-        const messageId = Math.random();
-        const user = req.body.user;
+const postMessage = async (req, res, next) => {
+        const person = req.body.person;
         const title = req.body.title;
         const text = req.body.messageText;
 
-        messages.push({ messageId, title, text, user, added: moment(new Date()).format('DD.MM.YYYY HH:mm') });
+        db.insertMessage(person, title, text);
 
         res.redirect('/');
 }
 
-exports.getMessage = (req, res, next) => {
+const getTargetMessage = async (req, res, next) => {
     const targetMessageId = req.params.messageId;
-    const targetMessage = messages.find(message => message.messageId.toString() === targetMessageId);
+    const targetMessage = await db.getMessage(targetMessageId);
 
     res.render('details', {
-        messageId: targetMessage.messageId,
-        title: targetMessage.title,
-        text: targetMessage.text,
-        user: targetMessage.user,
-        added: targetMessage.added,
+        id: targetMessage[0].id,
+        title: targetMessage[0].title,
+        text: targetMessage[0].text,
+        person: targetMessage[0].person,
+        added: targetMessage[0].added,
         pageTitle: 'Details',
         path: ''
-    })
+    });
+};
+
+module.exports = {
+    getHomePage,
+    getAddNewMessage,
+    postMessage,
+    getTargetMessage
 }

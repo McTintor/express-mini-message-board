@@ -10,7 +10,7 @@ router.get('/', indexController.getHomePage);
 
 router.get('/new', indexController.getAddNewMessage);
 
-router.get('/details/:messageId', indexController.getMessage);
+router.get('/details/:messageId', indexController.getTargetMessage);
 
 router.post('/new', indexController.postMessage);
 
