@@ -4,7 +4,7 @@ This is a simple message board application built with **Express**, **PostgreSQL*
 
 Live version here: https://express-mini-message-board-lk6a.onrender.com
 
-**Important Note** - It may take up to 60 seconds or more to load the website, since it is hosted on a free service (render.com).
+**Important Note** - It may take up to a few minutes to load the website, since it is hosted on a free service (render.com).
 
 ## Features
 
