@@ -59,10 +59,48 @@ const deleteMessage = async (req, res, next) => {
     }
   };
 
+  const getEditMessageForm = async (req, res, next) => {
+    const messageId = req.params.messageId;
+  
+    try {
+      const message = await db.getMessage(messageId);
+      if (message.length === 0) {
+        return res.status(404).send("Message not found.");
+      }
+  
+      res.render('edit', {
+        pageTitle: 'Edit Message',
+        path: '',
+        id: message[0].id,
+        person: message[0].person,
+        title: message[0].title,
+        text: message[0].text,
+      });
+    } catch (err) {
+      console.error("Error fetching message for edit: ", err);
+      res.status(500).send("Failed to load the edit form.");
+    }
+  };
+  
+  const postEditMessage = async (req, res, next) => {
+    const messageId = req.params.messageId;
+    const { person, title, messageText } = req.body;
+  
+    try {
+      await db.updateMessageById(messageId, person, title, messageText);
+      res.redirect('/');
+    } catch (err) {
+      console.error("Error updating message: ", err);
+      res.status(500).send("Failed to update the message.");
+    }
+  };
+
 module.exports = {
     getHomePage,
     getAddNewMessage,
     postMessage,
     getTargetMessage,
-    deleteMessage
+    deleteMessage,
+    getEditMessageForm,
+    postEditMessage
 }

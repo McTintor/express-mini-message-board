@@ -7,13 +7,17 @@
         <p>Added: <%= added %></p>
     
         <div class="form-buttons">
-            <form action="/" method="GET">
-                <button class="btn" type="submit">Back</button>
+            <form action="/edit/<%=id%>" method="GET">
+                <button class="btn" type="submit">Edit Message</button>
             </form>
             <form action="/delete/<%=id%>" method="POST">
                 <button class="btn" type="submit">Delete Message</button>
             </form>
         </div>
+
+        <form class="down-left" action="/" method="GET">
+            <button class="btn" type="submit">Back</button>
+        </form>
     
 </div>
 <%- include('footer.ejs') %>

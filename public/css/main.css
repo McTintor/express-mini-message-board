@@ -169,3 +169,8 @@ svg {
     display: flex;
     justify-content: space-between;
 }
+
+.down-left {
+    margin-top: 5rem;
+    margin-right: 25rem;
+}

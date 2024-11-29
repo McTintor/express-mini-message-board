@@ -22,7 +22,18 @@ async function deleteMessageById(id) {
     try {
       await pool.query('DELETE FROM messages WHERE id = $1', [id]);
     } catch (err) {
-      throw err; // Handle the error appropriately
+      throw err;
+    }
+  }
+
+  async function updateMessageById(id, person, title, text) {
+    try {
+      await pool.query(
+        'UPDATE messages SET person = $1, title = $2, text = $3 WHERE id = $4',
+        [person, title, text, id]
+      );
+    } catch (err) {
+      throw err;
     }
   }
   
@@ -30,5 +41,6 @@ module.exports = {
     getAllMessages,
     insertMessage,
     getMessage,
-    deleteMessageById
+    deleteMessageById,
+    updateMessageById
 };

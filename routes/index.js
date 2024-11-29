@@ -16,4 +16,8 @@ router.post('/new', indexController.postMessage);
 
 router.post('/delete/:messageId', indexController.deleteMessage);
 
+router.get('/edit/:messageId', indexController.getEditMessageForm); 
+
+router.post('/edit/:messageId', indexController.postEditMessage);
+
 module.exports = router;

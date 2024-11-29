@@ -7,6 +7,7 @@ This is a simple message board application built with **Express**, **PostgreSQL*
 - View a list of all messages
 - Add a new message to the board
 - View details of a specific message
+- Edit an individual message
 - Display message timestamps in a formatted date and time style
 
 ## Prerequisites
@@ -48,7 +49,7 @@ Replace `yourusername`, `yourpassword`, and `yourdatabase` with your actual data
 
 Run the `populatedb.js` script to create the database table and seed some initial data:
 
-- `node db/populatedb.js your_database_url`
+- `node db/populatedb.js`
 
 This will create a table called `messages` and populate it with a few sample entries.
 
@@ -77,3 +78,4 @@ The app will be available at `http://localhost:3004`.
   - `details.ejs`       # View for displaying single message details
   - `404.ejs`           # Error Page
   - `form.ejs`          # View for adding new message
+  - `edit.ejs`          # View for editing a message
