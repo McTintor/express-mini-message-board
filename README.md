@@ -2,6 +2,9 @@
 
 This is a simple message board application built with **Express**, **PostgreSQL**, and **EJS**. Users can add new messages, view a list of all messages, and read the details of each message. It demonstrates the use of server-side rendering with EJS templates and PostgreSQL for storing message data.
 
+Live version here: https://express-mini-message-board-lk6a.onrender.com
+**Important Note** - It may take up to 60 seconds or more to load the website, since it is hosted on a free service (render.com).
+
 ## Features
 
 - View a list of all messages
